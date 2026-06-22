@@ -1,0 +1,11 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/[locale]/contact/page": "app/[locale]/contact/page.js",
+  "/[locale]/services/air-freight/page": "app/[locale]/services/air-freight/page.js",
+  "/[locale]/about/page": "app/[locale]/about/page.js",
+  "/[locale]/page": "app/[locale]/page.js",
+  "/[locale]/blog/[slug]/page": "app/[locale]/blog/[slug]/page.js",
+  "/[locale]/quote/page": "app/[locale]/quote/page.js",
+  "/[locale]/tracking/page": "app/[locale]/tracking/page.js",
+  "/[locale]/admin/page": "app/[locale]/admin/page.js"
+}

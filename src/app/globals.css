@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Header shrunk ~20% (was 144px / 112px) */
+    --navbar-height: 115px;
+    /* Header logo image height; EXPRESS = 1/7, "International Logistics" = 1/14 */
+    --logo-h: 90px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body text-navy-800;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+/* Vietnamese mode: route every text style through a Vietnamese-capable
+   family (Be Vietnam Pro) so accent marks render with no fallback/tofu.
+   Mono is left as-is — it only ever shows ASCII tracking codes. */
+.lang-vi,
+.lang-vi .font-body,
+.lang-vi :is(h1, h2, h3, h4, h5, h6),
+.lang-vi .font-display {
+  font-family: var(--font-be-vietnam), var(--font-inter), system-ui, sans-serif !important;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600
+           text-white font-semibold px-6 py-3 rounded-lg
+           transition-all duration-200 shadow-sm hover:shadow-lg hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-2;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border-2 border-navy-500 text-navy-500
+           hover:bg-navy-500 hover:text-white
+           font-semibold px-6 py-3 rounded-lg
+           transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-navy-400 focus:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 text-navy-500 hover:text-brand-600
+           font-medium px-4 py-2 rounded-lg hover:bg-navy-50
+           transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6;
+  }
+
+  .input-field {
+    @apply block w-full rounded-lg border border-gray-200 bg-white
+           px-4 py-3 text-navy-800 placeholder-gray-400
+           focus:border-brand-500 focus:ring-2 focus:ring-brand-100
+           transition-colors duration-150;
+  }
+
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest text-brand-600;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-display font-bold text-navy-800 leading-tight;
+  }
+
+  .tracking-badge {
+    @apply inline-flex items-center gap-1.5 text-xs font-semibold
+           px-2.5 py-1 rounded-full;
+  }
+}
+
+/* Route animation for hero */
+.route-dot {
+  animation: routePulse 2s ease-in-out infinite;
+}
+.route-dot:nth-child(2) { animation-delay: 0.4s; }
+.route-dot:nth-child(3) { animation-delay: 0.8s; }
+
+@keyframes routePulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ── Dynamic hero route lines ───────────────────────────── */
+/* Continuously flowing dashes along each great-circle arc */
+.route-flow {
+  stroke-dasharray: 7 11;
+  animation: dashFlow 3.5s linear infinite;
+}
+@keyframes dashFlow {
+  to { stroke-dashoffset: -180; }
+}
+
+/* Soft pulsing glow on origin/destination city pins */
+.route-pin-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pinPulse 2.4s ease-in-out infinite;
+}
+@keyframes pinPulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.7); }
+  50%      { opacity: 0.9;  transform: scale(1.5); }
+}
+
+/* The little aircraft that floats inside the Quick Track bar follows the
+   cursor via inline transform; this just adds an idle bob when still. */
+@keyframes planeBob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-4px) rotate(-3deg); }
+}
+.plane-idle { animation: planeBob 3s ease-in-out infinite; }
